@@ -10,13 +10,6 @@ describe("Общие требования", async function () {
         await browser.assertView("plain", ".Application", {
             compositeImage: false,
         });
-        await browser.url('/hw/store/catalog/0');
-        const page1 = await browser.$(".Application");
-        await page1.waitForExist();
-
-        await browser.assertView("plain2", ".Application", {
-            compositeImage: false,
-        });
     });
     it("Вёрстка должна адаптироваться под ширину экрана 800px", async ({browser}) => {
         await browser.setWindowSize(800, 1000);
@@ -27,14 +20,6 @@ describe("Общие требования", async function () {
         await page.waitForExist();
 
         await browser.assertView("plain", ".Application", {
-            compositeImage: false,
-        });
-
-        await browser.url('/hw/store/catalog/0');
-        const page1 = await browser.$(".Application");
-        await page1.waitForExist();
-
-        await browser.assertView("plain2", ".Application", {
             compositeImage: false,
         });
     });

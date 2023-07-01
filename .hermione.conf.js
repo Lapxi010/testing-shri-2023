@@ -1,19 +1,14 @@
 module.exports = {
   baseUrl: "http://localhost:3000/hw/store",
-  sets: {
-    desktop: {
-      files: "test/hermione",
-      browsers: ['chrome']
-    },
-  },
   
+  windowSize: '1920x1080',
   browsers: {
     chrome: {
       automationProtocol: "devtools",
       desiredCapabilities: {
         browserName: "chrome",
       },
-      retry: 3,
+      retry: 3
     },
   },
   plugins: {
