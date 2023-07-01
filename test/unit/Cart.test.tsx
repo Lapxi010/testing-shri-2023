@@ -1,6 +1,6 @@
 import React from 'react';
 import {renderApp} from './utils/renderApp'
-import {screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('Тестировние корзины товаров', () => {
@@ -90,36 +90,47 @@ describe('Тестировние корзины товаров', () => {
         expect(link).toHaveAttribute('href', '/catalog')
     });
 
-    it('содержимое корзины должно сохраняться между перезагрузками страницы', async () => {
-
-    })
-
     it('Правильный alert после заполнений данных', async () => {
         const initState = {
-            cart: {},
+            cart: {
+                1: { id: 1, name: "товар1", price: 150, count: 1}
+            },
             products: [
                 { id: 1, name: "товар1", price: 150 },
                 { id: 2, name: "товар2", price: 200 },
             ],
-            details: {},
-            latestOrderId: 1
+            details: {}
         }
         const {container, stubApi} = renderApp('/cart', initState)
 
-        // const btn: any = screen.queryByRole('button', {name: 'Checkout'});
+        const btn: any = screen.queryByRole('button', {name: 'Checkout'});
 
-        // const Name = screen.getByLabelText('Name')
-        // const Phone = screen.getByLabelText('Phone')
-        // const Address = screen.getByLabelText('Address')
+        const Name = screen.getByLabelText('Name')
+        const Phone = screen.getByLabelText('Phone')
+        const Address = screen.getByLabelText('Address')
 
-        // await userEvent.type(Name, 'Kolya')
-        // await userEvent.type(Phone, '+8900995532')
-        // await userEvent.type(Address, 'Africa Nigeria')
+        await userEvent.type(Name, 'Kolya')
+        await userEvent.type(Phone, '+8900995532')
+        await userEvent.type(Address, 'Africa Nigeria')
 
-        // await userEvent.click(btn)
-        console.log(container.outerHTML)
+        await userEvent.click(btn)
+
         const alert: any = container.querySelector('.alert')
 
         expect(alert.classList).toContain('alert-success');
+    })
+
+    it('Проверка валидности номера работает', async () => {
+        renderApp('/cart', initState)
+
+        const btn: any = screen.queryByRole('button', {name: 'Checkout'});
+
+        const Phone = screen.getByLabelText('Phone')
+
+        await userEvent.type(Phone, '+8900995532')
+
+        await userEvent.click(btn)
+
+        expect(Phone.classList).not.toContain('is-invalid');
     })
 })
