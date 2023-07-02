@@ -1,7 +1,7 @@
 import React from 'react';
 import {renderApp} from './utils/renderApp'
-import {screen} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import {render, screen} from '@testing-library/react';
+
 
 describe('Тестирование каталога', () => {
     const initState = {
@@ -13,7 +13,7 @@ describe('Тестирование каталога', () => {
         details: {}
     }
 
-    it('В каталоге должны отображаться товары, список которых приходит с сервера', async () => {
+    it('В каталоге должны отображаться товары, список которых приходит с сервера(StubApi)', async () => {
         const {stubApi} = renderApp('/catalog', initState)
 
         await stubApi.getProducts()

@@ -2,7 +2,7 @@ const { assert } = require('chai');
 
 describe('Проверка каталога на функциональность', () => {
     it("Cодержимое корзины должно сохраняться между перезагрузками страницы;", async ({browser}) => {
-        browser.setWindowSize(1366, 768);
+        await browser.setWindowSize(1366, 768);
         await browser.url("/hw/store/catalog/0");
 
         const btn = await browser.$('.ProductDetails-AddToCart')
@@ -24,7 +24,7 @@ describe('Проверка каталога на функциональност�
         );
     });
     it("Если товар уже добавлен в корзину, повторное нажатие кнопки добавить в корзину должно увеличивать его количество", async ({browser}) => {
-        browser.setWindowSize(1366, 768);
+        await browser.setWindowSize(1366, 768);
         await browser.url("/hw/store/cart");
 
         const countBefore = browser.$(".Cart-Count");
@@ -49,4 +49,10 @@ describe('Проверка каталога на функциональност�
             "В корзине количество должно увеличиться до 2"
         );
     });
+    it('В каталоге отображаются товары приходящие с сервера', async ({browser}) => {
+        browser.setWindowSize(1366, 768);
+        await browser.url("/hw/store/catalog");
+
+        const carts = await browser.$(".ProductItem-Name");
+    })
 })
