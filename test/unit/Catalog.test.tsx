@@ -1,6 +1,6 @@
 import React from 'react';
 import {renderApp} from './utils/renderApp'
-import {render, screen} from '@testing-library/react';
+import {screen} from '@testing-library/react';
 
 
 describe('Тестирование каталога', () => {

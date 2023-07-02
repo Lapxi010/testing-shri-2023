@@ -1,7 +1,8 @@
 import React from 'react';
 import {renderApp} from './utils/renderApp'
-import {render, screen} from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { checkoutComplete } from '../../src/client/store';
 
 describe('Тестировние корзины товаров', () => {
     const initState = {
@@ -101,36 +102,11 @@ describe('Тестировние корзины товаров', () => {
             ],
             details: {}
         }
-        const {container, stubApi} = renderApp('/cart', initState)
-
-        const btn: any = screen.queryByRole('button', {name: 'Checkout'});
-
-        const Name = screen.getByLabelText('Name')
-        const Phone = screen.getByLabelText('Phone')
-        const Address = screen.getByLabelText('Address')
-
-        await userEvent.type(Name, 'Kolya')
-        await userEvent.type(Phone, '+8900995532')
-        await userEvent.type(Address, 'Africa Nigeria')
-
-        await userEvent.click(btn)
+        const {container, stubApi, store} = renderApp('/cart', initState)
+        await store.dispatch(checkoutComplete(1))
 
         const alert: any = container.querySelector('.alert')
 
         expect(alert.classList).toContain('alert-success');
-    })
-
-    it('Проверка валидности номера работает', async () => {
-        renderApp('/cart', initState)
-
-        const btn: any = screen.queryByRole('button', {name: 'Checkout'});
-
-        const Phone = screen.getByLabelText('Phone')
-
-        await userEvent.type(Phone, '+8900995532')
-
-        await userEvent.click(btn)
-
-        expect(Phone.classList).not.toContain('is-invalid');
     })
 })

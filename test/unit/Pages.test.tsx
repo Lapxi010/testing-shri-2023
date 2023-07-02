@@ -1,6 +1,5 @@
 import React from 'react';
 import {renderApp} from './utils/renderApp'
-import {screen} from '@testing-library/react';
 
 describe('В магазине должно быть несколько страниц', () => {
     it('В магазине есть Home', () => {

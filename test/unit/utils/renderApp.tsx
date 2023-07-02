@@ -6,10 +6,10 @@ import { Provider } from 'react-redux';
 
 import { Application } from '../../../src/client/Application';
 import { initStore } from '../../../src/client/store';
-import {CartState} from '../../../src/common/types'
+import { CartState } from '../../../src/common/types'
 import { ApplicationState } from '../../../src/client/store';
 
-class StubAPi {
+export class StubAPi {
     public products: any
 
     constructor(products: any) {

@@ -11,6 +11,7 @@ describe("Общие требования", async function () {
             compositeImage: false,
         });
     });
+
     it("Вёрстка должна адаптироваться под ширину экрана 800px", async ({browser}) => {
         await browser.setWindowSize(800, 1000);
 
@@ -23,8 +24,6 @@ describe("Общие требования", async function () {
             compositeImage: false,
         });
     });
-
-
 
     it("на ширине меньше 576px навигационное меню должно скрываться за гамбургер", async ({browser}) => {
         await browser.setWindowSize(500, 1000);
