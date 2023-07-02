@@ -1,6 +1,12 @@
 const { assert } = require('chai');
 
-describe("Общие требования", async function () {
+describe("Общие требования",  async () => {
+    afterEach(async function ({browser}) {
+        await browser.execute(() =>
+            window.localStorage.removeItem("example-store-cart")
+        );
+    });
+
     it("вёрстка должна адаптироваться под ширину экрана 1100px", async ({browser}) => {
         await browser.setWindowSize(1100, 800);
         await browser.url('/hw/store');

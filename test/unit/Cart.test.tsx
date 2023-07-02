@@ -2,7 +2,7 @@ import React from 'react';
 import {renderApp} from './utils/renderApp'
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { checkoutComplete } from '../../src/client/store';
+import {addToCart, checkoutComplete} from '../../src/client/store';
 
 describe('Тестировние корзины товаров', () => {
     const initState = {
@@ -108,5 +108,15 @@ describe('Тестировние корзины товаров', () => {
         const alert: any = container.querySelector('.alert')
 
         expect(alert.classList).toContain('alert-success');
+    })
+
+    it('Проверка сохранения продукта в localeStorage', async () => {
+        const {store, cart} = renderApp('/cart')
+
+        await store.dispatch(addToCart(
+            { id: 1, name: "товар1", price: 150, material: 'black', color: 'i@am', description: '42' }
+        ))
+
+        expect(Object.keys(cart.state).length).toBe(1)
     })
 })

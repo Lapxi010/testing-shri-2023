@@ -66,5 +66,5 @@ export const renderApp = (route = '/', state: ApplicationState = {products: [], 
         </MemoryRouter>
     );
 
-    return {...render(application), store, stubApi}
+    return {...render(application), store, stubApi, cart}
 }
